@@ -26,5 +26,20 @@ public class Technician {
         this.services = services;
         this.reports = reports;
     }
-    
+
+    public void addService(Service service){
+        this.services.add(service);
+    }
+
+    public void deleteService(Service service){
+        this.services.remove(service);
+    }
+
+    public void addReport(Report report){
+        this.reports.add(report);
+    }
+
+    public void deleteReport(Report report){
+        this.reports.remove(report);
+    }
 }
