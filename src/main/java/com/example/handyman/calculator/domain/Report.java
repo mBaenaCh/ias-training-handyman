@@ -21,6 +21,10 @@ public class Report {
         Objects.requireNonNullElse(initDateTime, "The service initial-date-time must not be null");
         Objects.requireNonNullElse(endDateTime, "The service end-date-time must not be null");
 
+        if(endDateTime.isBefore(initDateTime)){
+            throw new IllegalArgumentException("The service end-date-time must be after the initial one");
+        }
+
         this.reportId = reportId;
         this.technicianId = technicianId;
         this.serviceId = serviceId;
