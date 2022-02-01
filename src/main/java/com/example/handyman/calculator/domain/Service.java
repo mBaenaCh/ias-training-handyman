@@ -9,15 +9,12 @@ import java.util.Objects;
 public class Service {
     private final Id serviceId;
     private final ServiceType type;
-    private final LocalDateTime initDateTime;
 
-    public Service(Id serviceId, ServiceType type, LocalDateTime initDateTime) {
+    public Service(Id serviceId, ServiceType type) {
         Objects.requireNonNull(serviceId, "The ID must not be null");
         Objects.requireNonNull(type, "The service type must not be null");
-        Objects.requireNonNull(initDateTime, "The service initial date time must not be null");
 
         this.serviceId = serviceId;
         this.type = type;
-        this.initDateTime = initDateTime;
     }
 }
