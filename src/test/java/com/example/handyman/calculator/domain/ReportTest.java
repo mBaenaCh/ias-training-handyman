@@ -14,31 +14,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReportTest {
-    Id reportId = Id.generateUUID();
     Id serviceId = Id.generateUUID();
     Id technicianId = Id.generateUUID();
     LocalDateTime initDateTime = LocalDateTime.now();
     LocalDateTime endDateTime = LocalDateTime.now().plusMinutes(2);
 
-    @Test
-    public void shouldReturnNullPointerExceptionWhenTheReportIDisNull(){
-        //Arrange
-        reportId = null;
-
-        //Act
-        Executable executable = () -> new Report(reportId, serviceId, technicianId, initDateTime, endDateTime);
-
-        //Assert
-        assertThrows(NullPointerException.class, executable);
-    }
+    Service service = new Service(serviceId, ServiceType.Normal);
 
     @Test
     public void shouldReturnNullPointerExceptionWhenTheTechnicianIDisNull(){
         //Arrange
-        reportId = null;
+        technicianId = null;
 
         //Act
-        Executable executable = () -> new Report(reportId, technicianId, serviceId, initDateTime, endDateTime);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -50,7 +39,7 @@ class ReportTest {
         serviceId = null;
 
         //Act
-        Executable executable = () -> new Report(reportId, technicianId, serviceId, initDateTime, endDateTime);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -62,7 +51,7 @@ class ReportTest {
         initDateTime = null;
 
         //Act
-        Executable executable = () -> new Report(reportId, technicianId, serviceId, initDateTime, endDateTime);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -74,7 +63,7 @@ class ReportTest {
         endDateTime = null;
 
         //Act
-        Executable executable = () -> new Report(reportId, technicianId, serviceId, initDateTime, endDateTime);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -86,7 +75,7 @@ class ReportTest {
         endDateTime = LocalDateTime.now().minusMinutes(2);
 
         //Act
-        Executable executable = () -> new Report(reportId, technicianId, serviceId, initDateTime, endDateTime);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
 
         //Assert
         assertThrows(IllegalArgumentException.class, executable);
@@ -122,14 +111,14 @@ class ReportTest {
         List<Report> reports = new ArrayList<>();
         Integer i=1;
         while(i < 6){
-            Id reportId = Id.generateUUID();
             Id technicianId = Id.generateUUID();
             Id serviceId = Id.generateUUID();
             LocalDateTime initDate = LocalDateTime.of(2022, 1, 2*i, i, 0, 0);
             System.out.println("init date: "+initDate);
             LocalDateTime endDate = LocalDateTime.of(2022, 1, 2*i, 3*i, 0, 0);
             System.out.println("end date: "+endDate);
-            Report report = new Report(reportId, technicianId, serviceId, initDate, endDate);
+            Service service = new Service(serviceId, ServiceType.Normal);
+            Report report = new Report(technicianId, serviceId, initDate, endDate, service);
             reports.add(report);
             i++;
         }

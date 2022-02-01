@@ -21,11 +21,10 @@ class TechnicianTest {
     Id reportId = Id.generateUUID();
     LocalDateTime endDateTime = initDateTime.plusDays(1);
 
-    Report report = new Report(reportId, technicianId, serviceId, initDateTime, endDateTime);
-    Service service = new Service(serviceId, type, initDateTime);
+    Service service = new Service(serviceId, type);
+    Report report = new Report(technicianId, serviceId, initDateTime, endDateTime, service);
 
     List<Report> reports = new ArrayList<>();
-    List<Service> services = new ArrayList<>();
 
     @Test
     public void shouldReturnNullPointerExceptionWhenTheTechnicianIDisNull(){
@@ -33,7 +32,7 @@ class TechnicianTest {
         technicianId = null;
 
         //Act
-        Executable executable = () -> new Technician(technicianId, name, lastName, services, reports);
+        Executable executable = () -> new Technician(technicianId, name, lastName, reports);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -45,7 +44,7 @@ class TechnicianTest {
         name = null;
 
         //Act
-        Executable executable = () -> new Technician(technicianId, name, lastName, services, reports);
+        Executable executable = () -> new Technician(technicianId, name, lastName, reports);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -57,19 +56,7 @@ class TechnicianTest {
         lastName = null;
 
         //Act
-        Executable executable = () -> new Technician(technicianId, name, lastName, services, reports);
-
-        //Assert
-        assertThrows(NullPointerException.class, executable);
-    }
-
-    @Test
-    public void shouldReturnNullPointerExceptionWhenTheTechnicianServicesAreNull(){
-        //Arrange
-        services = null;
-
-        //Act
-        Executable executable = () -> new Technician(technicianId, name, lastName, services, reports);
+        Executable executable = () -> new Technician(technicianId, name, lastName, reports);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -81,40 +68,23 @@ class TechnicianTest {
         reports = null;
 
         //Act
-        Executable executable = () -> new Technician(technicianId, name, lastName, services, reports);
+        Executable executable = () -> new Technician(technicianId, name, lastName, reports);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
     }
 
     @Test
-    public void shouldIncrementTheSizeOfTheServicesWhenANewOneIsAdded(){
-        //Arrange
-        Id serviceId2 = Id.generateUUID();
-        ServiceType type2 = ServiceType.Emergency;
-        LocalDateTime initDateTime2 = LocalDateTime.now().plusMinutes(2);
-
-        Service service2 = new Service(serviceId2, type2, initDateTime2);
-        Technician technician = new Technician(technicianId, name, lastName, services, reports);
-
-        //Act
-        technician.addService(service);
-        technician.addService(service2);
-
-        //Assert
-        assertEquals(2, technician.getServices().size());
-    }
-
-    @Test
     public void shouldIncrementTheSizeOfTheReportsWhenANewOneIsAdded(){
         //Arrange
-        Id reportId2 = Id.generateUUID();
         Id serviceId2 = Id.generateUUID();
         LocalDateTime initDateTime2 = LocalDateTime.now().plusMinutes(2);
         LocalDateTime endDateTime2 = LocalDateTime.now().plusMinutes(4);
 
-        Report report2 = new Report(reportId2, technicianId, serviceId2,initDateTime2, endDateTime2);
-        Technician technician = new Technician(technicianId, name, lastName, services, reports);
+        Service service2 = new Service(serviceId2, ServiceType.Emergency);
+
+        Report report2 = new Report(technicianId, serviceId2,initDateTime2, endDateTime2, service2);
+        Technician technician = new Technician(technicianId, name, lastName, reports);
 
         //Act
         technician.addReport(report);
@@ -125,34 +95,16 @@ class TechnicianTest {
     }
 
     @Test
-    public void shouldDecreaseTheSizeOfTheServicesWhenOneIsRemoved(){
-        //Arrange
-        Id serviceId2 = Id.generateUUID();
-        ServiceType type2 = ServiceType.Emergency;
-        LocalDateTime initDateTime2 = LocalDateTime.now().plusMinutes(2);
-
-        Service service2 = new Service(serviceId2, type2, initDateTime2);
-        Technician technician = new Technician(technicianId, name, lastName, services, reports);
-
-        //Act
-        technician.addService(service);
-        technician.addService(service2);
-        technician.deleteService(service);
-
-        //Assert
-        assertEquals(1, technician.getServices().size());
-    }
-
-    @Test
     public void shouldIncrementTheSizeOfTheReportsWhenANewOneIsRemoved(){
         //Arrange
         Id reportId2 = Id.generateUUID();
         Id serviceId2 = Id.generateUUID();
         LocalDateTime initDateTime2 = LocalDateTime.now().plusMinutes(2);
         LocalDateTime endDateTime2 = LocalDateTime.now().plusMinutes(4);
+        Service service2 = new Service(serviceId2, ServiceType.Emergency);
 
-        Report report2 = new Report(reportId2, technicianId, serviceId2,initDateTime2, endDateTime2);
-        Technician technician = new Technician(technicianId, name, lastName, services, reports);
+        Report report2 = new Report(technicianId, serviceId2, initDateTime2, endDateTime2, service2);
+        Technician technician = new Technician(technicianId, name, lastName, reports);
 
         //Act
         technician.addReport(report);
