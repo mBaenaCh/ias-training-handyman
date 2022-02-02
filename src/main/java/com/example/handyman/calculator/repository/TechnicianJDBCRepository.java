@@ -13,7 +13,9 @@ import java.util.List;
 @Component
 public class TechnicianJDBCRepository implements TechnicianRepository {
 
+
     private final JdbcTemplate jdbcTemplate;
+    private ServiceJDBCRepository serviceRepository;
 
     public TechnicianJDBCRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -37,7 +39,7 @@ public class TechnicianJDBCRepository implements TechnicianRepository {
         Id serviceId = Id.generateUUIDFromString(resultSet.getString("service_id"));
         LocalDateTime initDateTime = resultSet.getTimestamp("init_date_time").toLocalDateTime();
         LocalDateTime endDateTime = resultSet.getTimestamp("end_date_time").toLocalDateTime();
-        Service reportedService = getReportedService(serviceId);
+        Service reportedService = serviceRepository.getById(serviceId);
         return new Report(
                 technicianId,
                 serviceId,
@@ -46,23 +48,6 @@ public class TechnicianJDBCRepository implements TechnicianRepository {
                 reportedService
         );
     };
-
-    private final RowMapper<Service> serviceRowMapper = (resultSet, rowNum) -> {
-        Id serviceId = Id.generateUUIDFromString(resultSet.getString("id"));
-
-        if(resultSet.getString("type").equals("normal")){
-            ServiceType type = ServiceType.Normal;
-            return new Service(serviceId, type);
-        }else{
-            ServiceType type = ServiceType.Emergency;
-            return new Service(serviceId, type);
-        }
-    };
-
-    public Service getReportedService(Id serviceId){
-        String query = "SELECT * FROM service WHERE service.id = ?";
-        return jdbcTemplate.queryForObject(query, serviceRowMapper, serviceId.toString());
-    }
 
     @Override
     public void create(Technician technician) {
