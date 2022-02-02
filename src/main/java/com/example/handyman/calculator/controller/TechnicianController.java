@@ -73,8 +73,9 @@ public class TechnicianController {
         Id technicianId = Id.generateUUIDFromString(id);
         Name name = new Name(input.getName());
         LastName lastName = new LastName(input.getLastName());
+        List<Report> reports = service.getAllReports(technicianId);
 
-        Technician technician = new Technician(technicianId, name, lastName, );
+        Technician technician = new Technician(technicianId, name, lastName, reports);
 
         if(service.updateById(technicianId, technician)){
             return new ResponseEntity<>(

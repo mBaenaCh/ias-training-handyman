@@ -23,7 +23,7 @@ public class TechnicianJDBCRepository implements TechnicianRepository {
         Id id = Id.generateUUIDFromString(resultSet.getString("id"));
         Name name = new Name(resultSet.getString("name"));
         LastName lastName = new LastName(resultSet.getString("last_name"));
-        List<Report> reports = getAllReportsForATechnician(id);
+        List<Report> reports = getAllReports(id);
         return new Technician(
                 id,
                 name,
