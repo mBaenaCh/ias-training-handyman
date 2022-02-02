@@ -47,6 +47,5 @@ public class TechnicianService {
         }else {
             return false;
         }
-
     }
 }
