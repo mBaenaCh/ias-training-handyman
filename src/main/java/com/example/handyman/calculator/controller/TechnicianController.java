@@ -59,8 +59,7 @@ public class TechnicianController {
                     foundTechnician,
                     HttpStatus.OK);
         }else{
-            return new ResponseEntity(
-                    "The technician with the given ID was not found",
+            return new ResponseEntity<>(
                     HttpStatus.NOT_FOUND);
         }
     }
@@ -82,25 +81,22 @@ public class TechnicianController {
                     technician,
                     HttpStatus.OK);
         }else{
-            return new ResponseEntity(
-                    "The technician with the given ID was not found",
+            return new ResponseEntity<>(
                     HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteById(
+    public ResponseEntity<String> deleteById(
             @PathVariable("id") String id){
 
         Id technicianId = Id.generateUUIDFromString(id);
 
         if(service.deleteById(technicianId)){
-            return  new ResponseEntity(
-                    "Deleted succesfuly",
+            return  new ResponseEntity<>(
                     HttpStatus.OK);
         }else{
-            return new ResponseEntity(
-                    "The technician with the given ID was not found",
+            return new ResponseEntity<>(
                     HttpStatus.NOT_FOUND);
         }
     }
