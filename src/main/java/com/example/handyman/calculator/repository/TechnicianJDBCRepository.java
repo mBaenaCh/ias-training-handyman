@@ -64,11 +64,6 @@ public class TechnicianJDBCRepository implements TechnicianRepository {
         return jdbcTemplate.queryForObject(query, serviceRowMapper, serviceId.toString());
     }
 
-    public List<Report> getAllReportsForATechnician(Id technicianId){
-        String query = "SELECT technician_id, service_id, init_date_time, end_date_time FROM report INNER JOIN technician ON report.technician_id = technician.id AND report.technician_id = ?";
-        return jdbcTemplate.query(query, reportRowMapper, technicianId.toString());
-    }
-
     @Override
     public void create(Technician technician) {
         String query = "INSERT INTO technician(id, name, last_name) VALUES(?, ?, ?)";
@@ -106,5 +101,11 @@ public class TechnicianJDBCRepository implements TechnicianRepository {
     public void deleteById(Id id) {
         String query = "DELETE FROM technician WHERE id = ?";
         jdbcTemplate.update(query, id.toString());
+    }
+
+    @Override
+    public List<Report> getAllReports(Id technicianId){
+        String query = "SELECT technician_id, service_id, init_date_time, end_date_time FROM report INNER JOIN technician ON report.technician_id = technician.id AND report.technician_id = ?";
+        return jdbcTemplate.query(query, reportRowMapper, technicianId.toString());
     }
 }

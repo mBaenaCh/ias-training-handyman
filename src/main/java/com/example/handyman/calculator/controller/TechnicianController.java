@@ -1,12 +1,13 @@
 package com.example.handyman.calculator.controller;
 
-import com.example.handyman.calculator.domain.Id;
-import com.example.handyman.calculator.domain.Technician;
+import com.example.handyman.calculator.domain.*;
+import com.example.handyman.calculator.model.TechnicianInput;
 import com.example.handyman.calculator.service.TechnicianService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,10 +22,22 @@ public class TechnicianController {
 
     @PostMapping
     public ResponseEntity<Technician> create(
-            @RequestBody Technician technician){
+            @RequestBody TechnicianInput input){
+
+        Id id = Id.generateUUIDFromString(input.getId());
+        Name name = new Name(input.getName());
+        LastName lastName = new LastName(input.getLastName());
+        List<Report> reports = new ArrayList<>();
+
+        Technician toCreate = new Technician(
+                id,
+                name,
+                lastName,
+                reports
+        );
 
         return new ResponseEntity<>(
-                service.create(technician),
+                service.create(toCreate),
                 HttpStatus.CREATED);
     }
 
@@ -55,9 +68,13 @@ public class TechnicianController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Technician> updateById(
             @PathVariable("id") String id,
-            @RequestBody Technician technician){
+            @RequestBody TechnicianInput input){
 
         Id technicianId = Id.generateUUIDFromString(id);
+        Name name = new Name(input.getName());
+        LastName lastName = new LastName(input.getLastName());
+
+        Technician technician = new Technician(technicianId, name, lastName, );
 
         if(service.updateById(technicianId, technician)){
             return new ResponseEntity<>(
