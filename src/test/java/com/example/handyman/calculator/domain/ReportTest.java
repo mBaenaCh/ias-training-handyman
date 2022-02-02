@@ -1,15 +1,16 @@
 package com.example.handyman.calculator.domain;
 
 
+import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.IsoFields;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +23,7 @@ class ReportTest {
     Service service = new Service(serviceId, ServiceType.Normal);
 
     @Test
-    public void shouldReturnNullPointerExceptionWhenTheTechnicianIDisNull(){
+    public void shouldReturnNullPointerExceptionWhenTheTechnicianIDisNull() {
         //Arrange
         technicianId = null;
 
@@ -34,7 +35,7 @@ class ReportTest {
     }
 
     @Test
-    public void shouldReturnNullPointerExceptionWhenTheServiceIDisNull(){
+    public void shouldReturnNullPointerExceptionWhenTheServiceIDisNull() {
         //Arrange
         serviceId = null;
 
@@ -46,7 +47,7 @@ class ReportTest {
     }
 
     @Test
-    public void shouldReturnNullPointerExceptionWhenTheInitDateTimeIsNull(){
+    public void shouldReturnNullPointerExceptionWhenTheInitDateTimeIsNull() {
         //Arrange
         initDateTime = null;
 
@@ -58,7 +59,7 @@ class ReportTest {
     }
 
     @Test
-    public void shouldReturnNullPointerExceptionWhenTheEndDateTimeIsNull(){
+    public void shouldReturnNullPointerExceptionWhenTheEndDateTimeIsNull() {
         //Arrange
         endDateTime = null;
 
@@ -70,7 +71,7 @@ class ReportTest {
     }
 
     @Test
-    public void shouldReturnIllegalArgumentExceptionWhenTheEndDateTimeIsBeforeTheInitDateTime(){
+    public void shouldReturnIllegalArgumentExceptionWhenTheEndDateTimeIsBeforeTheInitDateTime() {
         //Arrange
         endDateTime = LocalDateTime.now().minusMinutes(2);
 
@@ -82,7 +83,7 @@ class ReportTest {
     }
 
     @Test
-    public void formattingLocalDateTime(){
+    public void formattingLocalDateTime() {
 
         LocalDateTime init = LocalDateTime.of(2022, 1, 18, 8, 0, 0);
         LocalDateTime end = LocalDateTime.of(2022, 1, 31, 15, 59, 0);
@@ -92,37 +93,54 @@ class ReportTest {
         DayOfWeek initDay = init.getDayOfWeek(); //Tuestay < Saturday
 
 
-        if(init.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) <= 0){
+        if (init.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) <= 0) {
             System.out.println(initDay + " menor o igual que " + DayOfWeek.SATURDAY);
-        }else {
+        } else {
             System.out.println(initDay + " Mayor que " + DayOfWeek.SATURDAY);
         }
 
         Integer week = init.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-        System.out.println("Amount of hours worked: "+ workedHours);
-        System.out.println("Number of the week for the given date: "+ week);
-        System.out.println("Day of week: "+ initDay);
-        System.out.println("Hora de la fecha: "+ init.getHour());
+        System.out.println("Amount of hours worked: " + workedHours);
+        System.out.println("Number of the week for the given date: " + week);
+        System.out.println("Day of week: " + initDay);
+        System.out.println("Hora de la fecha: " + init.getHour());
         assertEquals(3, week);
     }
 
     @Test
-    public void shouldCreateMultipleReports(){
-        List<Report> reports = new ArrayList<>();
-        Integer i=1;
-        while(i < 6){
-            Id technicianId = Id.generateUUID();
-            Id serviceId = Id.generateUUID();
-            LocalDateTime initDate = LocalDateTime.of(2022, 1, 2*i, i, 0, 0);
-            System.out.println("init date: "+initDate);
-            LocalDateTime endDate = LocalDateTime.of(2022, 1, 2*i, 3*i, 0, 0);
-            System.out.println("end date: "+endDate);
-            Service service = new Service(serviceId, ServiceType.Normal);
-            Report report = new Report(technicianId, serviceId, initDate, endDate, service);
-            reports.add(report);
-            i++;
+    public void shouldClassifyAReportDateIntervalToATypeOfHours() {
+        LocalDateTime initTime = LocalDateTime.of(2022, 2, 6, 22, 28);
+        LocalDateTime endTime = LocalDateTime.of(2022, 2, 7, 2, 28);
+
+        LocalTime initShift = LocalTime.of(7,0);
+        LocalTime endShift = LocalTime.of(20,0);
+
+        /*LocalDateTime initTimeNormalNight = LocalDateTime.of(2022, 2, 5, 21, 0);
+        LocalDateTime endTimeNormalNight = LocalDateTime.of(2022, 2, 5, 22, 0);
+
+        LocalDateTime initTimeDominical = LocalDateTime.of(2022, 2, 6, 6, 28);
+        LocalDateTime endTimeDominical = LocalDateTime.of(2022, 2, 6, 8, 28);*/
+
+        //Long workedHours = ChronoUnit.HOURS.between(initTime, endTime);
+
+        /*
+        Set<DayOfWeek> daysOpen = new HashSet<>(Arrays.asList(
+                DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY));*/
+
+        if( initTime.getDayOfWeek().compareTo(DayOfWeek.MONDAY) >= 0 && initTime.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) <= 0){
+
+            if( initTime.toLocalTime().isAfter(initShift) && initTime.toLocalTime().isBefore(endShift) ){
+                /*System.out.println( initTime.getHour() + " : " + initTime.getMinute() + " Is in the interval");
+                System.out.println( initTime.getDayOfWeek() + " Greater than "+ DayOfWeek.MONDAY + " but less or equal than "+ DayOfWeek.SATURDAY);*/
+                System.out.println("Horas normales: " + ChronoUnit.HOURS.between(initTime, endTime));
+
+            } else {
+                System.out.println("Horas nocturnas: " + ChronoUnit.HOURS.between(initTime, endTime));
+            }
+
+        } else if ( initTime.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0){
+            System.out.println("Horas dominicales: " + ChronoUnit.HOURS.between(initTime, endTime));
         }
 
-        System.out.println(reports.size());
     }
 }
