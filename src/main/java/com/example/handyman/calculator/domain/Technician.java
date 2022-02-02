@@ -1,11 +1,11 @@
 package com.example.handyman.calculator.domain;
 
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Objects;
 
-@Data
+@Getter
 public class Technician {
     private final Id technicianId;
     private final Name name;

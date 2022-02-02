@@ -25,4 +25,9 @@ public class LastName {
 
         this.value = trimmedValue;
     }
+
+    @Override
+    public String toString(){
+        return this.value;
+    }
 }

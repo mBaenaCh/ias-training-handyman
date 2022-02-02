@@ -121,7 +121,7 @@ class ReportTest {
         LocalDateTime initTimeDominical = LocalDateTime.of(2022, 2, 6, 6, 28);
         LocalDateTime endTimeDominical = LocalDateTime.of(2022, 2, 6, 8, 28);*/
 
-        //Long workedHours = ChronoUnit.HOURS.between(initTime, endTime);
+        Long workedHours = ChronoUnit.MINUTES.between(initTime, endTime);
 
         /*
         Set<DayOfWeek> daysOpen = new HashSet<>(Arrays.asList(

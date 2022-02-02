@@ -1,8 +1,11 @@
 package com.example.handyman.calculator.domain;
 
+import lombok.Data;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+@Data
 public class Name {
 
     private static final Pattern pattern = Pattern.compile("^[a-zA-Z\\s:]{0,40}$");

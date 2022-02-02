@@ -1,11 +1,12 @@
 package com.example.handyman.calculator.domain;
 
-import lombok.Data;
+
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Data
+@Getter
 public class Report {
 
     private final Id technicianId;

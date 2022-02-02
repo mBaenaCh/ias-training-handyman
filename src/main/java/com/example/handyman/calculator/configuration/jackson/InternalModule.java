@@ -23,6 +23,5 @@ public class InternalModule extends SimpleModule {
 
         addSerializer(LastName.class, new LastNameParser.Serializer());
         addDeserializer(LastName.class, new LastNameParser.Deserializer());
-
     }
 }

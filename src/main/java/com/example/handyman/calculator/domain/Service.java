@@ -1,11 +1,11 @@
 package com.example.handyman.calculator.domain;
 
-import lombok.Data;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
+
 import java.util.Objects;
 
-@Data
+@Getter
 public class Service {
     private final Id serviceId;
     private final ServiceType type;

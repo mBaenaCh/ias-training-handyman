@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class NameParser {
 
-    public static class Serializer extends JsonSerializer<Name> {
+    public static class Serializer extends JsonSerializer<Name>{
 
         @Override
         public void serialize(Name value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
@@ -21,7 +21,7 @@ public class NameParser {
         }
     }
 
-    public static class Deserializer extends JsonDeserializer<Name>{
+    public static class Deserializer extends JsonDeserializer<Name> {
 
         @Override
         public Name deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
