@@ -31,8 +31,8 @@ public class TechnicianService {
     }
 
     public Boolean updateById(Id id, Technician technician){
-        Technician foundTechnician = repository.getById(id);
-        if(foundTechnician != null){
+
+        if(repository.getById(id) != null){
             repository.updateById(id, technician);
             return true;
         }else {
