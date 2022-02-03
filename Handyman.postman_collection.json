@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "8e626108-8ae7-4efa-aa5d-06d39c88613c",
+		"name": "Handyman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Technicians",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"431409b0-1901-4b56-ae20-fdcdfbfc25b5\",\r\n    \"name\": \"Milo\",\r\n    \"lastName\": \"Mejia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/technicians",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"technicians"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/technicians",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"technicians"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/technicians/431409b0-1901-4b56-ae20-fdcdfbfc25b5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"technicians",
+								"431409b0-1901-4b56-ae20-fdcdfbfc25b5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"technicianId\": \"431409b0-1901-4b56-ae20-fdcdfbfc25b5\",\r\n    \"name\": \"Camilo\",\r\n    \"lastName\": \"Mejia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/technicians/431409b0-1901-4b56-ae20-fdcdfbfc25b5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"technicians",
+								"431409b0-1901-4b56-ae20-fdcdfbfc25b5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": []
+		},
+		{
+			"name": "Reports",
+			"item": []
+		}
+	]
+}
