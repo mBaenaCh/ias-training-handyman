@@ -19,7 +19,7 @@ class ServiceTest {
         serviceId = null;
 
         //Act
-        Executable executable = () -> new Service(serviceId, type);
+        Executable executable = () -> new ServiceJob(serviceId, type);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -31,7 +31,7 @@ class ServiceTest {
         type = null;
 
         //Act
-        Executable executable = () -> new Service(serviceId, type);
+        Executable executable = () -> new ServiceJob(serviceId, type);
 
         //Assert
         assertThrows(NullPointerException.class, executable);

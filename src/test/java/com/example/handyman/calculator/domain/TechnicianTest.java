@@ -21,7 +21,7 @@ class TechnicianTest {
     Id reportId = Id.generateUUID();
     LocalDateTime endDateTime = initDateTime.plusDays(1);
 
-    Service service = new Service(serviceId, type);
+    ServiceJob service = new ServiceJob(serviceId, type);
     Report report = new Report(technicianId, serviceId, initDateTime, endDateTime, service);
 
     List<Report> reports = new ArrayList<>();
@@ -81,7 +81,7 @@ class TechnicianTest {
         LocalDateTime initDateTime2 = LocalDateTime.now().plusMinutes(2);
         LocalDateTime endDateTime2 = LocalDateTime.now().plusMinutes(4);
 
-        Service service2 = new Service(serviceId2, ServiceType.Emergency);
+        ServiceJob service2 = new ServiceJob(serviceId2, ServiceType.Emergency);
 
         Report report2 = new Report(technicianId, serviceId2,initDateTime2, endDateTime2, service2);
         Technician technician = new Technician(technicianId, name, lastName, reports);
@@ -101,7 +101,7 @@ class TechnicianTest {
         Id serviceId2 = Id.generateUUID();
         LocalDateTime initDateTime2 = LocalDateTime.now().plusMinutes(2);
         LocalDateTime endDateTime2 = LocalDateTime.now().plusMinutes(4);
-        Service service2 = new Service(serviceId2, ServiceType.Emergency);
+        ServiceJob service2 = new ServiceJob(serviceId2, ServiceType.Emergency);
 
         Report report2 = new Report(technicianId, serviceId2, initDateTime2, endDateTime2, service2);
         Technician technician = new Technician(technicianId, name, lastName, reports);

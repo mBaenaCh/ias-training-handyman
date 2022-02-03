@@ -20,7 +20,7 @@ class ReportTest {
     LocalDateTime initDateTime = LocalDateTime.now();
     LocalDateTime endDateTime = LocalDateTime.now().plusMinutes(2);
 
-    Service service = new Service(serviceId, ServiceType.Normal);
+    ServiceJob service = new ServiceJob(serviceId, ServiceType.Normal);
 
     @Test
     public void shouldReturnNullPointerExceptionWhenTheTechnicianIDisNull() {

@@ -21,7 +21,7 @@ public class ServiceJDBCRepository implements ServiceRepository {
     private final RowMapper<ServiceJob> serviceRowMapper = (resultSet, rowNum) -> {
         Id serviceId = Id.generateUUIDFromString(resultSet.getString("id"));
 
-        if(resultSet.getString("type").equals("normal")){
+        if(resultSet.getString("type").equals("Normal")){
             ServiceType type = ServiceType.Normal;
             return new ServiceJob(serviceId, type);
         }else{
