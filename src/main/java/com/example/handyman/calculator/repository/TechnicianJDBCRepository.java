@@ -39,7 +39,7 @@ public class TechnicianJDBCRepository implements TechnicianRepository {
         Id serviceId = Id.generateUUIDFromString(resultSet.getString("service_id"));
         LocalDateTime initDateTime = resultSet.getTimestamp("init_date_time").toLocalDateTime();
         LocalDateTime endDateTime = resultSet.getTimestamp("end_date_time").toLocalDateTime();
-        Service reportedService = serviceRepository.getById(serviceId);
+        ServiceJob reportedService = serviceRepository.getById(serviceId);
         return new Report(
                 technicianId,
                 serviceId,

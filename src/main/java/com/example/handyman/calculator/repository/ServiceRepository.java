@@ -1,21 +1,19 @@
 package com.example.handyman.calculator.repository;
 
 import com.example.handyman.calculator.domain.Id;
-import com.example.handyman.calculator.domain.Report;
-import com.example.handyman.calculator.domain.Service;
-import com.example.handyman.calculator.domain.Technician;
+import com.example.handyman.calculator.domain.ServiceJob;
 
 import java.util.List;
 
 public interface ServiceRepository {
 
-    void create(Service service);
+    void create(ServiceJob service);
 
-    List<Service> getAll();
+    List<ServiceJob> getAll();
 
-    Service getById(Id id);
+    ServiceJob getById(Id id);
 
-    void updateById(Id id, Service service);
+    void updateById(Id id, ServiceJob service);
 
     void deleteById(Id id);
 

@@ -13,9 +13,9 @@ public class Report {
     private final Id serviceId;
     private final LocalDateTime initDateTime;
     private final LocalDateTime endDateTime;
-    private final Service reportedService;
+    private final ServiceJob reportedService;
 
-    public Report(Id technicianId, Id serviceId, LocalDateTime initDateTime, LocalDateTime endDateTime, Service reportedService) {
+    public Report(Id technicianId, Id serviceId, LocalDateTime initDateTime, LocalDateTime endDateTime, ServiceJob reportedService) {
         Objects.requireNonNull(technicianId, "The technician ID must not be null");
         Objects.requireNonNull(serviceId, "The service ID must not be null");
         Objects.requireNonNull(initDateTime, "The service initial-date-time must not be null");
