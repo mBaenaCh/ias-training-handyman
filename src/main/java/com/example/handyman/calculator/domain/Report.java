@@ -26,6 +26,13 @@ public class Report {
             throw new IllegalArgumentException("The service end-date-time must be after the initial one");
         }
 
+        if(initDateTime.getYear() != endDateTime.getYear() &&
+                initDateTime.getMonth().compareTo(endDateTime.getMonth()) != 0 &&
+                    initDateTime.getDayOfMonth() != endDateTime.getDayOfMonth()){
+
+            throw new IllegalArgumentException("The service has to be done in the same day, month and year");
+        }
+
         this.technicianId = technicianId;
         this.serviceId = serviceId;
         this.initDateTime = initDateTime;
