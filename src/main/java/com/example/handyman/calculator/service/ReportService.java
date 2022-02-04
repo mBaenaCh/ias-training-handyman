@@ -26,15 +26,4 @@ public class ReportService {
         return repository.getAll();
     }
 
-    public Boolean getById(Id id){
-
-        Report foundReport = repository.getById(id);
-
-        if(foundReport != null){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
 }

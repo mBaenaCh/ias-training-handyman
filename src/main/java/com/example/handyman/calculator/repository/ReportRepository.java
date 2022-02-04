@@ -11,6 +11,4 @@ public interface ReportRepository {
 
     List<Report> getAll();
 
-    Report getById(Id id);
-
 }

@@ -61,10 +61,4 @@ public class ReportJDBCRepository implements ReportRepository{
         return jdbcTemplate.query(query, reportRowMapper);
     }
 
-    @Override
-    public Report getById(Id id) {
-        String query = "SELECT * FROM report WHERE (report.technician_id, report.service_id) IN (( ?, ? ))";
-        return jdbcTemplate.queryForObject(query, reportRowMapper);
-    }
-
 }
