@@ -15,6 +15,8 @@ public class TechnicianJDBCRepository implements TechnicianRepository {
 
 
     private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
     private ServiceJDBCRepository serviceRepository;
 
     public TechnicianJDBCRepository(JdbcTemplate jdbcTemplate) {
@@ -39,13 +41,11 @@ public class TechnicianJDBCRepository implements TechnicianRepository {
         Id serviceId = Id.generateUUIDFromString(resultSet.getString("service_id"));
         LocalDateTime initDateTime = resultSet.getTimestamp("init_date_time").toLocalDateTime();
         LocalDateTime endDateTime = resultSet.getTimestamp("end_date_time").toLocalDateTime();
-        ServiceJob reportedService = serviceRepository.getById(serviceId);
         return new Report(
                 technicianId,
                 serviceId,
                 initDateTime,
-                endDateTime,
-                reportedService
+                endDateTime
         );
     };
 

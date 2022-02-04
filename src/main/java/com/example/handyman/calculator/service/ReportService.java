@@ -1,7 +1,5 @@
 package com.example.handyman.calculator.service;
 
-
-import com.example.handyman.calculator.domain.Id;
 import com.example.handyman.calculator.domain.Report;
 import com.example.handyman.calculator.repository.ReportRepository;
 import org.springframework.stereotype.Service;

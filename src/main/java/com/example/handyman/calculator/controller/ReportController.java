@@ -3,9 +3,12 @@ package com.example.handyman.calculator.controller;
 import com.example.handyman.calculator.domain.Id;
 import com.example.handyman.calculator.domain.Report;
 import com.example.handyman.calculator.domain.ServiceJob;
+import com.example.handyman.calculator.domain.Technician;
 import com.example.handyman.calculator.model.ReportInput;
 import com.example.handyman.calculator.service.ReportService;
 import com.example.handyman.calculator.service.ServiceJobService;
+import com.example.handyman.calculator.service.TechnicianService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +23,14 @@ import java.util.List;
 public class ReportController {
 
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     private ReportService service;
-    private ServiceJobService jobService;
+
+    @Autowired
+    private ServiceJobService serviceJobService;
+
+    @Autowired
+    private TechnicianService technicianService;
 
     public ReportController(ReportService service) {
         this.service = service;
@@ -35,16 +44,17 @@ public class ReportController {
         Id serviceId = Id.generateUUIDFromString(input.getServiceId());
         LocalDateTime initDateTime = LocalDateTime.parse(input.getInitDateTime(), formatter);
         LocalDateTime endDateTime = LocalDateTime.parse(input.getEndDateTime(), formatter);
-        ServiceJob serviceJob = jobService.getById(serviceId);
 
-        if (serviceJob != null) {
+        ServiceJob serviceJob = serviceJobService.getById(serviceId);
+        Technician technician = technicianService.getById(technicianId);
+
+        if (serviceJob != null && technician != null) {
             Report toCreate = new Report(technicianId,
                     serviceId,
                     initDateTime,
-                    endDateTime,
-                    serviceJob);
+                    endDateTime);
 
-            return new ResponseEntity<>(toCreate, HttpStatus.CREATED);
+            return new ResponseEntity<>(service.create(toCreate), HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(
                     HttpStatus.NOT_FOUND);

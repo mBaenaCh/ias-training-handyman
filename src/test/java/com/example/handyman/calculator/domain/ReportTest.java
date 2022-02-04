@@ -21,15 +21,13 @@ class ReportTest {
     LocalDateTime initDateTime = LocalDateTime.now();
     LocalDateTime endDateTime = LocalDateTime.now().plusMinutes(2);
 
-    ServiceJob service = new ServiceJob(serviceId, ServiceType.Normal);
-
     @Test
     public void shouldReturnNullPointerExceptionWhenTheTechnicianIDisNull() {
         //Arrange
         technicianId = null;
 
         //Act
-        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -41,7 +39,7 @@ class ReportTest {
         serviceId = null;
 
         //Act
-        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -53,7 +51,7 @@ class ReportTest {
         initDateTime = null;
 
         //Act
-        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -65,7 +63,7 @@ class ReportTest {
         endDateTime = null;
 
         //Act
-        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime);
 
         //Assert
         assertThrows(NullPointerException.class, executable);
@@ -77,7 +75,7 @@ class ReportTest {
         endDateTime = LocalDateTime.now().minusMinutes(2);
 
         //Act
-        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime, service);
+        Executable executable = () -> new Report(technicianId, serviceId, initDateTime, endDateTime);
 
         //Assert
         assertThrows(IllegalArgumentException.class, executable);
