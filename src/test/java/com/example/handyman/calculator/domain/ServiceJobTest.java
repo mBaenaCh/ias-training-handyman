@@ -6,9 +6,7 @@ import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-
-class ServiceTest {
+class ServiceJobTest {
 
     Id serviceId = Id.generateUUID();
     ServiceType type = ServiceType.Normal;

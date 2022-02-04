@@ -22,7 +22,7 @@ class TechnicianTest {
     LocalDateTime endDateTime = initDateTime.plusDays(1);
 
     ServiceJob service = new ServiceJob(serviceId, type);
-    Report report = new Report(technicianId, serviceId, initDateTime, endDateTime, service);
+    Report report = new Report(technicianId, serviceId, initDateTime, endDateTime);
 
     List<Report> reports = new ArrayList<>();
 
@@ -83,7 +83,7 @@ class TechnicianTest {
 
         ServiceJob service2 = new ServiceJob(serviceId2, ServiceType.Emergency);
 
-        Report report2 = new Report(technicianId, serviceId2,initDateTime2, endDateTime2, service2);
+        Report report2 = new Report(technicianId, serviceId2,initDateTime2, endDateTime2);
         Technician technician = new Technician(technicianId, name, lastName, reports);
 
         //Act
@@ -95,7 +95,7 @@ class TechnicianTest {
     }
 
     @Test
-    public void shouldIncrementTheSizeOfTheReportsWhenANewOneIsRemoved(){
+    public void shouldDecreaseTheSizeOfTheReportsWhenANewOneIsRemoved(){
         //Arrange
         Id reportId2 = Id.generateUUID();
         Id serviceId2 = Id.generateUUID();
@@ -103,7 +103,7 @@ class TechnicianTest {
         LocalDateTime endDateTime2 = LocalDateTime.now().plusMinutes(4);
         ServiceJob service2 = new ServiceJob(serviceId2, ServiceType.Emergency);
 
-        Report report2 = new Report(technicianId, serviceId2, initDateTime2, endDateTime2, service2);
+        Report report2 = new Report(technicianId, serviceId2, initDateTime2, endDateTime2);
         Technician technician = new Technician(technicianId, name, lastName, reports);
 
         //Act
