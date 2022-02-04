@@ -31,6 +31,7 @@ public class Report {
                     initDateTime.getDayOfMonth() != endDateTime.getDayOfMonth()){
 
             throw new IllegalArgumentException("The service has to be done in the same day, month and year");
+
         }
 
         this.technicianId = technicianId;
