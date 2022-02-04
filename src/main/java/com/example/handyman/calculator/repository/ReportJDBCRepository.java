@@ -7,7 +7,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.IsoFields;
+import java.util.Calendar;
+import java.util.List;
+import java.util.TimeZone;
 
 @Component
 public class ReportJDBCRepository implements ReportRepository{
@@ -33,5 +41,30 @@ public class ReportJDBCRepository implements ReportRepository{
                 reportedService
         );
     };
+
+    @Override
+    public void create(Report report) {
+        String query = "INSERT INTO report(technician_id, service_id, init_date_time, end_date_time, week_of_report) VALUES(?, ?, ?, ?, ?)";
+
+        jdbcTemplate.update(query, ps -> {
+            ps.setString(1, report.getTechnicianId().toString());
+            ps.setString(2, report.getServiceId().toString());
+            ps.setTimestamp(3, Timestamp.valueOf(report.getInitDateTime()));
+            ps.setTimestamp(4, Timestamp.valueOf(report.getEndDateTime()));
+            ps.setInt(5, report.getInitDateTime().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR));
+        });
+    }
+
+    @Override
+    public List<Report> getAll() {
+        String query = "SELECT * FROM report";
+        return jdbcTemplate.query(query, reportRowMapper);
+    }
+
+    @Override
+    public Report getById(Id id) {
+        String query = "SELECT * FROM report WHERE (report.technician_id, report.service_id) IN (( ?, ? ))";
+        return jdbcTemplate.queryForObject(query, reportRowMapper);
+    }
 
 }

@@ -5,6 +5,7 @@ import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -109,9 +110,10 @@ class ReportTest {
 
     @Test
     public void shouldClassifyAReportDateIntervalToATypeOfHours() {
-        LocalDateTime initTime = LocalDateTime.of(2022, 2, 6, 22, 28);
-        LocalDateTime endTime = LocalDateTime.of(2022, 2, 7, 2, 28);
+        LocalDateTime initTime = LocalDateTime.of(2022, 2, 3, 22, 26);
+        LocalDateTime endTime = LocalDateTime.of(2022, 2, 3, 22, 30);
 
+        Integer weekOfTheYear = initTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
         LocalTime initShift = LocalTime.of(7,0);
         LocalTime endShift = LocalTime.of(20,0);
 
@@ -121,17 +123,17 @@ class ReportTest {
         LocalDateTime initTimeDominical = LocalDateTime.of(2022, 2, 6, 6, 28);
         LocalDateTime endTimeDominical = LocalDateTime.of(2022, 2, 6, 8, 28);*/
 
-        Long workedHours = ChronoUnit.MINUTES.between(initTime, endTime);
+        //Long workedHours = ChronoUnit.MINUTES.between(initTime, endTime);
 
         /*
         Set<DayOfWeek> daysOpen = new HashSet<>(Arrays.asList(
                 DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY));*/
 
+        /*
         if( initTime.getDayOfWeek().compareTo(DayOfWeek.MONDAY) >= 0 && initTime.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) <= 0){
 
             if( initTime.toLocalTime().isAfter(initShift) && initTime.toLocalTime().isBefore(endShift) ){
-                /*System.out.println( initTime.getHour() + " : " + initTime.getMinute() + " Is in the interval");
-                System.out.println( initTime.getDayOfWeek() + " Greater than "+ DayOfWeek.MONDAY + " but less or equal than "+ DayOfWeek.SATURDAY);*/
+
                 System.out.println("Horas normales: " + ChronoUnit.HOURS.between(initTime, endTime));
 
             } else {
@@ -140,7 +142,7 @@ class ReportTest {
 
         } else if ( initTime.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0){
             System.out.println("Horas dominicales: " + ChronoUnit.HOURS.between(initTime, endTime));
-        }
-
+        }*/
+        System.out.println("Fecha inicio: "+ Timestamp.valueOf(initTime)+" Fecha fin: "+ Timestamp.valueOf(endTime)+" Semana del año: "+weekOfTheYear);
     }
 }
