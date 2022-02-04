@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"431409b0-1901-4b56-ae20-fdcdfbfc25b5\",\r\n    \"name\": \"Milo\",\r\n    \"lastName\": \"Mejia\"\r\n}",
+							"raw": "{\r\n    \"id\": \"f1acf1dd-782d-44ca-871e-91ebd9f7c372\",\r\n    \"name\": \"Karol\",\r\n    \"lastName\": \"Alzate\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,7 +63,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/technicians/431409b0-1901-4b56-ae20-fdcdfbfc25b5",
+							"raw": "http://localhost:8080/api/technicians/258d096e-c849-406a-9864-86c95b079de0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -72,7 +72,7 @@
 							"path": [
 								"api",
 								"technicians",
-								"431409b0-1901-4b56-ae20-fdcdfbfc25b5"
+								"258d096e-c849-406a-9864-86c95b079de0"
 							]
 						}
 					},
@@ -131,7 +131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"ac535db2-052a-484b-990b-5478a9e52ccd\",\r\n    \"type\": \"nOrmAL\"\r\n}",
+							"raw": "{\r\n    \"id\": \"f7235ba8-ee7c-4681-9f81-ceaf17662b9d\",\r\n    \"type\": \"normal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -180,7 +180,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/services/ed918c7e-324d-4dc5-aac0-249ef35567e9",
+							"raw": "http://localhost:8080/api/services/9d61be67-d5ba-484c-9f21-5143898e8b0a",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -189,7 +189,7 @@
 							"path": [
 								"api",
 								"services",
-								"ed918c7e-324d-4dc5-aac0-249ef35567e9"
+								"9d61be67-d5ba-484c-9f21-5143898e8b0a"
 							]
 						}
 					},
@@ -220,7 +220,59 @@
 		},
 		{
 			"name": "Reports",
-			"item": []
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"technicianId\": \"f31219bd-4c79-4fc6-ad3a-235e18fd4863\",\r\n    \"serviceId\": \"f7235ba8-ee7c-4681-9f81-ceaf17662b9d\",\r\n    \"initDateTime\": \"2022-02-04 15:35:00\",\r\n    \"endDateTime\": \"2022-02-04 16:35:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reports/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reports",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/reports/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reports",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
