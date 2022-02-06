@@ -70,13 +70,15 @@ public class ReportController {
                 HttpStatus.OK);
     }
 
-    @PutMapping
+    @GetMapping("{id}/calculate-hours/{week}")
     public ResponseEntity<WorkedHours> getWorkedHoursByTechnicianAndWeek(
-            @RequestBody WorkedHoursInput input){
+            @PathVariable("id") String id,
+            @PathVariable("week") Integer week){
 
-        Id technicianId = Id.generateUUIDFromString(input.getTechnicianId());
+        Id technicianId = Id.generateUUIDFromString(id);
+
         return new ResponseEntity<>(
-                service.calculateHoursOfWorkForTechnician(input.getWeek(), technicianId),
+                service.calculateHoursOfWorkForTechnician(week, technicianId),
                 HttpStatus.OK);
     }
 
