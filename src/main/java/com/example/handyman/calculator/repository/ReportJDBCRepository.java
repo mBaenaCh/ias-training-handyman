@@ -59,9 +59,15 @@ public class ReportJDBCRepository implements ReportRepository{
     }
 
     @Override
-    public List<Report> getAllReportsFromAWeekAndATechnician(Integer week, Id id) {
+    public List<Report> getAll() {
+        String query = "SELECT * FROM report";
+        return jdbcTemplate.query(query, reportRowMapper);
+    }
+
+    @Override
+    public List<Report> getAllFromTechnicianByWeek(Integer week, Id id) {
         String query = "SELECT * FROM report WHERE report.week_of_year = ? AND report.technician_id = ?";
         return jdbcTemplate.query(query, reportRowMapper, week, id.toString());
     }
-    
+
 }

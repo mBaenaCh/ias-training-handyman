@@ -9,7 +9,7 @@ public interface ReportRepository {
 
     void create(Report report);
 
-    List<Report> getAllReportsFromAWeekAndATechnician(Integer week, Id id);
+    List<Report> getAll();
 
-
+    List<Report> getAllFromTechnicianByWeek(Integer week, Id id);
 }
