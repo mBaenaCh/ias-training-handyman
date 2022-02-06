@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2e78e3d1-b8ae-4724-a732-01aa3f63a03b",
+		"_postman_id": "efdf61e8-add3-41d6-9f30-bf4678a5b133",
 		"name": "Handyman",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"f1acf1dd-782d-44ca-871e-91ebd9f7c372\",\r\n    \"name\": \"Karol\",\r\n    \"lastName\": \"Alzate\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Tavo\",\r\n    \"lastName\": \"Morales\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -131,7 +131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"f7235ba8-ee7c-4681-9f81-ceaf17662b9d\",\r\n    \"type\": \"normal\"\r\n}",
+							"raw": "{\r\n    \"type\": \"normal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,7 +228,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"technicianId\": \"f31219bd-4c79-4fc6-ad3a-235e18fd4863\",\r\n    \"serviceId\": \"f7235ba8-ee7c-4681-9f81-ceaf17662b9d\",\r\n    \"initDateTime\": \"2022-02-04 15:35:00\",\r\n    \"endDateTime\": \"2022-02-04 16:35:00\"\r\n}",
+							"raw": "{\r\n    \"technicianId\": \"da0eb268-ba1e-4bbe-8f19-73b6836aabe3\",\r\n    \"serviceId\": \"5478516f-3c36-4371-ad06-6764ebc310ff\",\r\n    \"initDateTime\": \"2022-02-07 21:00:00\",\r\n    \"endDateTime\": \"2022-02-07 23:00:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
