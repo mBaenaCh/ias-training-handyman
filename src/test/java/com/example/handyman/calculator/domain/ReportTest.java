@@ -1,7 +1,6 @@
 package com.example.handyman.calculator.domain;
 
 
-import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.IsoFields;
-import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,6 +80,45 @@ class ReportTest {
     }
 
     @Test
+    public void shouldReturnIllegalArgumentExceptionWhenTheDatesAreNotInTheSameYear(){
+        //Arrange
+        LocalDateTime init = LocalDateTime.of(2021, 2, 5, 11, 30, 0);
+        LocalDateTime end = LocalDateTime.of(2022, 2, 5, 11, 30, 0);
+
+        //Act
+        Executable executable = () -> new Report(technicianId, serviceId, init, end);
+
+        //Assert
+        assertThrows(IllegalArgumentException.class, executable);
+    }
+
+    @Test
+    public void shouldReturnIllegalArgumentExceptionWhenTheDatesAreNotInTheSameMonth(){
+        //Arrange
+        LocalDateTime init = LocalDateTime.of(2022, 1, 5, 11, 30, 0);
+        LocalDateTime end = LocalDateTime.of(2022, 2, 5, 11, 30, 0);
+
+        //Act
+        Executable executable = () -> new Report(technicianId, serviceId, init, end);
+
+        //Assert
+        assertThrows(IllegalArgumentException.class, executable);
+    }
+
+    @Test
+    public void shouldReturnIllegalArgumentExceptionWhenTheDatesAreNotInTheSameDayOfTheYearAndMonth(){
+        //Arrange
+        LocalDateTime init = LocalDateTime.of(2021, 2, 4, 11, 30, 0);
+        LocalDateTime end = LocalDateTime.of(2022, 2, 5, 11, 30, 0);
+
+        //Act
+        Executable executable = () -> new Report(technicianId, serviceId, init, end);
+
+        //Assert
+        assertThrows(IllegalArgumentException.class, executable);
+    }
+    /*
+    @Test
     public void formattingLocalDateTime() {
 
         LocalDateTime init = LocalDateTime.of(2022, 1, 18, 8, 0, 0);
@@ -104,16 +141,16 @@ class ReportTest {
         System.out.println("Day of week: " + initDay);
         System.out.println("Hora de la fecha: " + init.getHour());
         assertEquals(3, week);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void shouldClassifyAReportDateIntervalToATypeOfHours() {
         LocalDateTime initTime = LocalDateTime.of(2022, 2, 3, 22, 26);
         LocalDateTime endTime = LocalDateTime.of(2022, 2, 3, 22, 30);
 
         Integer weekOfTheYear = initTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
         LocalTime initShift = LocalTime.of(7,0);
-        LocalTime endShift = LocalTime.of(20,0);
+        LocalTime endShift = LocalTime.of(20,0);*/
 
         /*LocalDateTime initTimeNormalNight = LocalDateTime.of(2022, 2, 5, 21, 0);
         LocalDateTime endTimeNormalNight = LocalDateTime.of(2022, 2, 5, 22, 0);
@@ -141,6 +178,6 @@ class ReportTest {
         } else if ( initTime.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0){
             System.out.println("Horas dominicales: " + ChronoUnit.HOURS.between(initTime, endTime));
         }*/
-        System.out.println("Fecha inicio: "+ Timestamp.valueOf(initTime)+" Fecha fin: "+ Timestamp.valueOf(endTime)+" Semana del año: "+weekOfTheYear);
-    }
+        //System.out.println("Fecha inicio: "+ Timestamp.valueOf(initTime)+" Fecha fin: "+ Timestamp.valueOf(endTime)+" Semana del año: "+weekOfTheYear);
+    //}
 }
