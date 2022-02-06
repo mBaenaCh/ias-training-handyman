@@ -24,7 +24,7 @@ public class TechnicianController {
     public ResponseEntity<Technician> create(
             @RequestBody TechnicianInput input){
 
-        Id id = Id.generateUUIDFromString(input.getId());
+        Id id = Id.generateUUID();
         Name name = new Name(input.getName());
         LastName lastName = new LastName(input.getLastName());
         List<Report> reports = new ArrayList<>();

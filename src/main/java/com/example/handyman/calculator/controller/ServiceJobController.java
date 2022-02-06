@@ -26,7 +26,7 @@ public class ServiceJobController {
     public ResponseEntity<ServiceJob> create(
             @RequestBody ServiceJobInput input) {
 
-        Id serviceId = Id.generateUUIDFromString(input.getId());
+        Id serviceId = Id.generateUUID();
 
         if (input.getType().trim().toLowerCase().equals("normal")) {
             ServiceJob serviceJob = new ServiceJob(serviceId, ServiceType.Normal);

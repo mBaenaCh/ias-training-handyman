@@ -11,7 +11,6 @@ import lombok.Setter;
 @Setter
 public class TechnicianInput {
 
-    private String id;
     private String name;
     private String lastName;
 }

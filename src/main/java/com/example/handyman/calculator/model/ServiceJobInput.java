@@ -11,6 +11,5 @@ import lombok.Setter;
 @Setter
 public class ServiceJobInput {
 
-    private String id;
     private String type;
 }
