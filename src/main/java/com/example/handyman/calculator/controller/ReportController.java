@@ -1,10 +1,8 @@
 package com.example.handyman.calculator.controller;
 
-import com.example.handyman.calculator.domain.Id;
-import com.example.handyman.calculator.domain.Report;
-import com.example.handyman.calculator.domain.ServiceJob;
-import com.example.handyman.calculator.domain.Technician;
+import com.example.handyman.calculator.domain.*;
 import com.example.handyman.calculator.model.ReportInput;
+import com.example.handyman.calculator.model.WorkedHoursInput;
 import com.example.handyman.calculator.service.ReportService;
 import com.example.handyman.calculator.service.ServiceJobService;
 import com.example.handyman.calculator.service.TechnicianService;
@@ -54,7 +52,9 @@ public class ReportController {
                     initDateTime,
                     endDateTime);
 
-            return new ResponseEntity<>(service.create(toCreate), HttpStatus.CREATED);
+            return new ResponseEntity<>(
+                    service.create(toCreate),
+                    HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(
                     HttpStatus.NOT_FOUND);
@@ -67,6 +67,16 @@ public class ReportController {
 
         return new ResponseEntity<>(
                 service.getAll(),
+                HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<WorkedHours> getWorkedHoursByTechnicianAndWeek(
+            @RequestBody WorkedHoursInput input){
+
+        Id technicianId = Id.generateUUIDFromString(input.getTechnicianId());
+        return new ResponseEntity<>(
+                service.calculateHoursOfWorkForTechnician(input.getWeek(), technicianId),
                 HttpStatus.OK);
     }
 
