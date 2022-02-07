@@ -271,6 +271,29 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Calculate hours of work by week and techniciand id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/reports/258d096e-c849-406a-9864-86c95b079de0/calculate-hours/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reports",
+								"258d096e-c849-406a-9864-86c95b079de0",
+								"calculate-hours",
+								"6"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
