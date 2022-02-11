@@ -13,14 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/reports")
 public class ReportController {
-
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private ReportService service;
 
@@ -40,8 +37,8 @@ public class ReportController {
 
         Id technicianId = Id.generateUUIDFromString(input.getTechnicianId());
         Id serviceId = Id.generateUUIDFromString(input.getServiceId());
-        LocalDateTime initDateTime = LocalDateTime.parse(input.getInitDateTime(), formatter);
-        LocalDateTime endDateTime = LocalDateTime.parse(input.getEndDateTime(), formatter);
+        LocalDateTime initDateTime = LocalDateTime.parse(input.getInitDateTime());
+        LocalDateTime endDateTime = LocalDateTime.parse(input.getEndDateTime());
 
         ServiceJob serviceJob = serviceJobService.getById(serviceId);
         Technician technician = technicianService.getById(technicianId);
