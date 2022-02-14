@@ -60,7 +60,7 @@ public class ReportController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Report>> getAll(){
+    public ResponseEntity<List<Report>> getAll() {
 
         return new ResponseEntity<>(
                 service.getAll(),
@@ -70,13 +70,19 @@ public class ReportController {
     @GetMapping("{id}/calculate-hours/{week}")
     public ResponseEntity<WorkedHours> getWorkedHoursByTechnicianAndWeek(
             @PathVariable("id") String id,
-            @PathVariable("week") Integer week){
+            @PathVariable("week") Integer week) {
 
         Id technicianId = Id.generateUUIDFromString(id);
 
-        return new ResponseEntity<>(
-                service.calculateHoursOfWorkForTechnician(week, technicianId),
-                HttpStatus.OK);
-    }
+        Technician foundTechnician = technicianService.getById(technicianId);
 
+        if (foundTechnician == null) {
+            return new ResponseEntity<>(
+                    HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(
+                    service.calculateHoursOfWorkForTechnician(week, technicianId),
+                    HttpStatus.OK);
+        }
+    }
 }
