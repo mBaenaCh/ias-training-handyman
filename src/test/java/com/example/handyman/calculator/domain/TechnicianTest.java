@@ -3,9 +3,7 @@ package com.example.handyman.calculator.domain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +16,12 @@ class TechnicianTest {
     LastName lastName = new LastName("Baena");
 
     Id serviceId = Id.generateUUID();
-    ServiceType type = ServiceType.Normal;
-    LocalDateTime initDateTime = LocalDateTime.now();
+    LocalDateTime initDateTime = LocalDateTime.of(2022, 2, 17, 10, 0, 0);
 
     Id reportId = Id.generateUUID();
-    LocalDateTime endDateTime = initDateTime.plusDays(1);
+    LocalDateTime endDateTime = LocalDateTime.of(2022, 2, 17, 15, 0, 0);
 
-    ServiceJob service = new ServiceJob(serviceId, type);
-    //Report report = new Report(technicianId, serviceId, initDateTime, endDateTime);
+    Report report = new Report(reportId, serviceId, initDateTime, endDateTime);
 
     List<Report> reports = new ArrayList<>();
 
@@ -80,47 +76,31 @@ class TechnicianTest {
     @Test
     public void shouldIncrementTheSizeOfTheReportsWhenANewOneIsAdded() {
         //Arrange
-        Id serviceId2 = Id.generateUUID();
-        LocalDateTime initDateTime2 = LocalDateTime.now().plusMinutes(2);
-        LocalDateTime endDateTime2 = LocalDateTime.now().plusMinutes(4);
-
-        ServiceJob service2 = new ServiceJob(serviceId2, ServiceType.Emergency);
-
-        Report report2 = new Report(technicianId, serviceId2, initDateTime2, endDateTime2);
         Technician technician = new Technician(technicianId, name, lastName, reports);
 
         //Act
-        //technician.addReport(report);
-        technician.addReport(report2);
-
-        //Assert
-        assertEquals(2, technician.getReports().size());
-    }
-
-    @Test
-    public void shouldDecreaseTheSizeOfTheReportsWhenANewOneIsRemoved() {
-        //Arrange
-        Id reportId2 = Id.generateUUID();
-        Id serviceId2 = Id.generateUUID();
-        LocalDateTime initDateTime2 = LocalDateTime.now().plusMinutes(2);
-        LocalDateTime endDateTime2 = LocalDateTime.now().plusMinutes(4);
-        ServiceJob service2 = new ServiceJob(serviceId2, ServiceType.Emergency);
-
-        Report report2 = new Report(technicianId, serviceId2, initDateTime2, endDateTime2);
-        Technician technician = new Technician(technicianId, name, lastName, reports);
-
-        //Act
-        //technician.addReport(report);
-        technician.addReport(report2);
-        //technician.deleteReport(report);
+        technician.addReport(report);
 
         //Assert
         assertEquals(1, technician.getReports().size());
     }
 
     @Test
-    public void shouldCalculateDifferentTypesOfHours() {
+    public void shouldDecreaseTheSizeOfTheReportsWhenANewOneIsRemoved() {
+        //Arrange
+        Technician technician = new Technician(technicianId, name, lastName, reports);
 
+        //Act
+        technician.addReport(report);
+        technician.deleteReport(report);
+
+        //Assert
+        assertEquals(0, technician.getReports().size());
+    }
+
+    @Test
+    public void shouldCalculateDifferentTypesOfHours() {
+        //Arrange
         Report report2 = new Report(
                 Id.generateUUID(),
                 Id.generateUUID(),
@@ -148,7 +128,7 @@ class TechnicianTest {
                 LocalDateTime.of(2022, 2, 8, 21, 0, 0)
         );
 
-        //reports.add(report);
+        //Act
         reports.add(report2);
         reports.add(report3);
         reports.add(report4);
@@ -158,6 +138,7 @@ class TechnicianTest {
 
         WorkedHours workedHours = technician.calculateHoursWorked(technician.getReports());
 
+        //Assert
         assertEquals(18, workedHours.getTotalHours());
         assertEquals(11, workedHours.getNormalHours());
         assertEquals(7, workedHours.getNightHours());
